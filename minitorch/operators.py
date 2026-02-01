@@ -50,15 +50,15 @@ def add(x: float, y: float) -> float:
 
 
 def neg(x: float) -> float:
-    return -x
+    return -1.0 * x
 
 
-def lt(x: float, y: float) -> bool:
-    return x < y
+def lt(x: float, y: float) -> float:
+    return 1.0 if x < y else 0.0
 
 
-def eq(x: float, y: float) -> bool:
-    return x == y
+def eq(x: float, y: float) -> float:
+    return 1.0 if x == y else 0.0
 
 
 def max(x: float, y: float) -> float:
@@ -76,7 +76,7 @@ def sigmoid(x: float) -> float:
 
 def relu(x: float):
     """f(x) = x if x is grater than 0, else 0"""
-    return x if x > 0 else 0
+    return x if x > 0 else 0.0
 
 
 def log(x: float) -> float:
@@ -100,7 +100,7 @@ def inv_back(x: float, y: float) -> float:
 
 
 def relu_back(x: float, y: float) -> float:
-    return y if x > 0 else 0
+    return y if x > 0 else 0.0
 
 
 # ## Task 0.3
