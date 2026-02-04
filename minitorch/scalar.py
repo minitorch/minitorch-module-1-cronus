@@ -184,7 +184,12 @@ class Scalar:
         assert h.ctx is not None
 
         # TODO: Implement for Task 1.3.
-        raise NotImplementedError("Need to implement for Task 1.3")
+        #raise NotImplementedError("Need to implement for Task 1.3")
+        var_func_pair = []
+        for func in h.last_fn.backward(h.ctx, d_output):
+            var_func_pair.append((None, func))
+        return var_func_pair
+
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """

@@ -111,7 +111,7 @@ class Mul(ScalarFunction):
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
-        return d_output, d_output
+        return (d_output, d_output)
 
 class Inv(ScalarFunction):
     "Inverse function"
@@ -127,7 +127,7 @@ class Inv(ScalarFunction):
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
         (a,) = ctx.saved_values
-        return operators.inv_back(a) * d_output
+        return operators.inv_back(a, d_output)
 
 class Neg(ScalarFunction):
     "Negation function"
@@ -157,7 +157,9 @@ class Sigmoid(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         # TODO: Implement for Task 1.4.
-        raise NotImplementedError("Need to implement for Task 1.4")
+        #raise NotImplementedError("Need to implement for Task 1.4")
+        (a,) = ctx.saved_values
+        return operators.sigmoid(a) * (1 - operators.sigmoid(a)) * d_output
         
 
 class ReLU(ScalarFunction):
@@ -174,7 +176,7 @@ class ReLU(ScalarFunction):
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
         (a,) = ctx.saved_values
-        return operators.relu_back(a) * d_output
+        return operators.relu_back(a, d_output)
 
 
 class Exp(ScalarFunction):
