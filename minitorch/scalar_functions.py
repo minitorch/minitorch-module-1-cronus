@@ -216,7 +216,7 @@ class LT(ScalarFunction):
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
         #(a, b) = ctx.saved_values
-        return 0
+        return 0, 0
 
 class EQ(ScalarFunction):
     "Equal function $f(x) =$ 1.0 if x is equal to y else 0.0"
@@ -232,4 +232,4 @@ class EQ(ScalarFunction):
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
         #(a, b) = ctx.saved_values
-        return 0
+        return 0, 0
