@@ -72,8 +72,14 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         Non-constant Variables in topological order starting from the right.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
-
+    #raise NotImplementedError("Need to implement for Task 1.4")
+    visited_node = []
+    if variable.is_leaf():
+        visited_node.append(variable)
+    else:
+        for parent in variable.parents:
+            visited_node += topological_sort(parent)
+    return visited_node
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
     """
@@ -88,8 +94,14 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     """
     # TODO: Implement for Task 1.4.
     #raise NotImplementedError("Need to implement for Task 1.4")
-    for (var, deveri) in variable.chain_rule(deriv):
-        print(deriv)
+
+    for sorted_var in topological_sort(variable):
+        if (sorted_var.is_leaf()):
+            sorted_var.accumulate_derivative(deriv)
+        else:
+            for (var, local_deriv) in sorted_var.chain_rule(deriv):
+                var.derivative = local_deriv
+            
 
 
 @dataclass

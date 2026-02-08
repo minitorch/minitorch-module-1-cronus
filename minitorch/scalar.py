@@ -188,7 +188,8 @@ class Scalar:
         var_deriv_pair = []
         d_list = h.last_fn.backward(h.ctx, d_output)
         for var, d in zip(h.inputs, d_list):
-            var_deriv_pair.append((var, d))
+            if (not var.is_constant()):
+                var_deriv_pair.append((var, d))
         
         return var_deriv_pair
 
