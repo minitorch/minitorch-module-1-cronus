@@ -215,7 +215,7 @@ class LT(ScalarFunction):
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
-        (a, b) = ctx.saved_values
+        #(a, b) = ctx.saved_values
         return 0
 
 class EQ(ScalarFunction):
@@ -231,5 +231,5 @@ class EQ(ScalarFunction):
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
         # TODO: Implement for Task 1.4.
         #raise NotImplementedError("Need to implement for Task 1.4")
-        (a, b) = ctx.saved_values
+        #(a, b) = ctx.saved_values
         return 0

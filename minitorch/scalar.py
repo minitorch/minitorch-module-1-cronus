@@ -83,6 +83,8 @@ class Scalar:
         return "Scalar(%f)" % self.data
 
     def __mul__(self, b: ScalarLike) -> Scalar:
+        #print("__mul__:")
+        #print(Mul.apply(self,b))
         return Mul.apply(self, b)
 
     def __truediv__(self, b: ScalarLike) -> Scalar:
@@ -186,8 +188,15 @@ class Scalar:
         # TODO: Implement for Task 1.3.
         #raise NotImplementedError("Need to implement for Task 1.3")
         var_deriv_pair = []
-        d_list = h.last_fn.backward(h.ctx, d_output)
+        d_list = h.last_fn._backward(h.ctx, d_output)
+        #print("h_inputs:")
+        #print(h.inputs)
+        #print("d_list")
+        #print(d_list)
         for var, d in zip(h.inputs, d_list):
+            #print("chain_rule var:")
+            #print(var)
+            #print(var.is_constant())
             if (not var.is_constant()):
                 var_deriv_pair.append((var, d))
         

@@ -96,7 +96,7 @@ def log_back(x: float, y: float) -> float:
 
 
 def inv_back(x: float, y: float) -> float:
-    return -(1 / x * x) * y
+    return -(1 / (x * x)) * y
 
 
 def relu_back(x: float, y: float) -> float:

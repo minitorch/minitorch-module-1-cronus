@@ -73,12 +73,15 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     """
     # TODO: Implement for Task 1.4.
     #raise NotImplementedError("Need to implement for Task 1.4")
-    visited_node = []
-    if variable.is_leaf():
-        visited_node.append(variable)
-    else:
+    visited_node = [variable]
+    #print(variable)
+    #print("is_leaf")
+    #print(variable.is_leaf())
+    if not variable.is_leaf():
         for parent in variable.parents:
             visited_node += topological_sort(parent)
+    #print("after topo sort:")
+    #print(visited_node)
     return visited_node
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -94,13 +97,21 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     """
     # TODO: Implement for Task 1.4.
     #raise NotImplementedError("Need to implement for Task 1.4")
-
+    
+    # dict for variable and derivatives
+    variable.derivative = deriv
     for sorted_var in topological_sort(variable):
-        if (sorted_var.is_leaf()):
-            sorted_var.accumulate_derivative(deriv)
-        else:
-            for (var, local_deriv) in sorted_var.chain_rule(deriv):
-                var.derivative = local_deriv
+        #print(sorted_var)
+        if (not sorted_var.is_leaf()):
+            for (var, local_deriv) in sorted_var.chain_rule(sorted_var.derivative):
+                #print("var:" + str(var.unique_id))
+                #print(var)
+                #print("local_deriv:")
+                #print(local_deriv)
+                if (var.is_leaf()):
+                    var.accumulate_derivative(local_deriv)
+                else:
+                    var.derivative = local_deriv
             
 
 
