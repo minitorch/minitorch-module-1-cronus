@@ -186,8 +186,10 @@ class Scalar:
         # TODO: Implement for Task 1.3.
         #raise NotImplementedError("Need to implement for Task 1.3")
         var_func_pair = []
-        for func in h.last_fn.backward(h.ctx, d_output):
-            var_func_pair.append((None, func))
+        d_list = h.last_fn.backward(h.ctx, d_output)
+        for var, d in zip(h.inputs, d_list):
+            var_func_pair.append((var, d))
+        
         return var_func_pair
 
 
