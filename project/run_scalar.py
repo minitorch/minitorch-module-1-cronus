@@ -12,8 +12,9 @@ class Network(minitorch.Module):
         super().__init__()
         # TODO: Implement for Task 1.5.
         #raise NotImplementedError("Need to implement for Task 1.5")
-        self.layer1 = Linear(50, 50)
+        self.layer1 = Linear(2, 50)
         self.layer2 = Linear(50, 50)
+        self.layer3 = Linear(50, 2)
 
     def forward(self, x):
         middle = [h.relu() for h in self.layer1.forward(x)]
@@ -45,9 +46,12 @@ class Linear(minitorch.Module):
         # TODO: Implement for Task 1.5.
         outputs = []
         #raise NotImplementedError("Need to implement for Task 1.5")
-        for i in range(len(self.weights):
-            for j in range(len(self.weights[j]):
-                output.append(inputs[i] * self.weights[i][j])
+        #print(self.weights)
+        for j in range(len(self.weights[0])):
+            accu = minitorch.Scalar(0.0)
+            for i in range(len(self.weights)):
+                accu = accu + inputs[i] * self.weights[i][j].value
+            outputs.append(accu)
         return outputs
                 
 
